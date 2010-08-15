@@ -30,7 +30,7 @@
          <groupId>org.testng</groupId>
          <artifactId>testng</artifactId>
          <scope>test</scope>
-         <classifier>jdk15</classifier>
+         <classifier>${org.testng.testng.classifier}</classifier>
       </dependency>
 
       <dependency>
@@ -42,11 +42,31 @@
       <dependency>
          <groupId>javax.annotation</groupId>
          <artifactId>jsr250-api</artifactId>
+         <scope>compile</scope>
       </dependency>
 
       <dependency>
          <groupId>javax.faces</groupId>
          <artifactId>jsf-api</artifactId>
+         <scope>compile</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.seleniumhq.selenium.core</groupId>
+         <artifactId>selenium-core</artifactId>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.seleniumhq.selenium.client-drivers</groupId>
+         <artifactId>selenium-java-client-driver</artifactId>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.test</groupId>
+         <artifactId>richfaces-selenium</artifactId>
+         <scope>test</scope>
       </dependency>
 
    </dependencies>
@@ -57,10 +77,6 @@
          <activation>
             <activeByDefault>true</activeByDefault>
          </activation>
-         
-         <properties>
-         	<distributable.flag />
-         </properties>
          
          <dependencies>
 
@@ -114,10 +130,6 @@
             <activeByDefault>false</activeByDefault>
          </activation>
          
-         <properties>
-         	<distributable.flag>&lt;distributable/&gt;</distributable.flag>
-         </properties>
-         
          <dependencies>
 
             <dependency>
@@ -169,11 +181,13 @@
             <dependency>
                <groupId>javax.annotation</groupId>
                <artifactId>jsr250-api</artifactId>
+               <scope>compile</scope>
             </dependency>
 
             <dependency>
                <groupId>javax.faces</groupId>
                <artifactId>jsf-api</artifactId>
+               <scope>compile</scope>
             </dependency>
 
             <dependency>
@@ -232,11 +246,13 @@
             <dependency>
                <groupId>javax.annotation</groupId>
                <artifactId>jsr250-api</artifactId>
+               <scope>compile</scope>
             </dependency>
 
             <dependency>
                <groupId>javax.faces</groupId>
                <artifactId>jsf-api</artifactId>
+               <scope>compile</scope>
             </dependency>
 
             <dependency>
@@ -298,6 +314,7 @@
                <groupId>javax.faces</groupId>
                <artifactId>jsf-api</artifactId>
                <version>1.2_13</version>
+               <scope>compile</scope>
             </dependency>
 
             <dependency>
@@ -317,18 +334,21 @@
                <groupId>com.sun.facelets</groupId>
                <artifactId>jsf-facelets</artifactId>
                <version>1.1.15.B1</version>
+               <scope>compile</scope>
             </dependency>
 
             <dependency>
                <groupId>javax.el</groupId>
                <artifactId>el-api</artifactId>
                <version>1.2</version>
+               <scope>compile</scope>
             </dependency>
 
             <dependency>
                <groupId>javax.el</groupId>
                <artifactId>el-ri</artifactId>
                <version>1.2</version>
+               <scope>compile</scope>
             </dependency>
 
          </dependencies>
@@ -471,30 +491,9 @@
       <!-- functional tests -->
       <profile>
          <id>ftest-jboss-remote-51</id>
-         <activation>
-            <activeByDefault>false</activeByDefault>
-         </activation>
-
-         <properties>
-            <ftest.artifact>ftest-numberguess</ftest.artifact>
-            <ftest.version>0.1${ftest.version.discriminator}</ftest.version>
-         </properties>
-
-         <dependencies>
-            <dependency>
-               <groupId>org.jboss.weld.examples.ftest</groupId>
-               <artifactId>${ftest.artifact}</artifactId>
-               <version>${ftest.version}</version>
-               <scope>test</scope>
-            </dependency>
-         </dependencies>
 
          <build>
             <plugins>
-               <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-dependency-plugin</artifactId>
-               </plugin>
                <plugin>
                   <groupId>org.codehaus.cargo</groupId>
                   <artifactId>cargo-maven2-plugin</artifactId>
@@ -516,30 +515,9 @@
       </profile>
       <profile>
          <id>ftest-jboss-remote-60</id>
-         <activation>
-            <activeByDefault>false</activeByDefault>
-         </activation>
-
-         <properties>
-            <ftest.artifact>ftest-numberguess</ftest.artifact>
-            <ftest.version>0.1${ftest.version.discriminator}</ftest.version>
-         </properties>
-
-         <dependencies>
-            <dependency>
-               <groupId>org.jboss.weld.examples.ftest</groupId>
-               <artifactId>${ftest.artifact}</artifactId>
-               <version>${ftest.version}</version>
-               <scope>test</scope>
-            </dependency>
-         </dependencies>
 
          <build>
             <plugins>
-               <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-dependency-plugin</artifactId>
-               </plugin>
                <plugin>
                   <groupId>org.codehaus.cargo</groupId>
                   <artifactId>cargo-maven2-plugin</artifactId>
@@ -561,30 +539,9 @@
       </profile>
       <profile>
          <id>ftest-jboss-cluster-60</id>
-         <activation>
-            <activeByDefault>false</activeByDefault>
-         </activation>
-
-         <properties>
-            <ftest.artifact>ftest-numberguess</ftest.artifact>
-            <ftest.version>0.1${ftest.version.discriminator}</ftest.version>
-         </properties>
-
-         <dependencies>
-            <dependency>
-               <groupId>org.jboss.weld.examples.ftest</groupId>
-               <artifactId>${ftest.artifact}</artifactId>
-               <version>${ftest.version}</version>
-               <scope>test</scope>
-            </dependency>
-         </dependencies>
 
          <build>
             <plugins>
-               <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-dependency-plugin</artifactId>
-               </plugin>
                <plugin>
                   <groupId>org.codehaus.mojo</groupId>
                   <artifactId>selenium-maven-plugin</artifactId>
@@ -604,6 +561,11 @@
 
    <build>
       <finalName>weld-numberguess</finalName>
+      <sourceDirectory>src/main/java</sourceDirectory>
+      <testSourceDirectory>src/ftest/java</testSourceDirectory>
+      <outputDirectory>target/classes</outputDirectory>
+      <testOutputDirectory>target/test</testOutputDirectory>
+      <defaultGoal>validate</defaultGoal>
       <plugins>
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
@@ -656,7 +618,6 @@
                </filesets>
             </configuration>
          </plugin>
-
          <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>tomcat-maven-plugin</artifactId>

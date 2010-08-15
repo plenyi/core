@@ -24,6 +24,7 @@
    
    <dependencies>
    
+      <!-- not including this was probably a grave mistake :)
       <dependency>
          <groupId>org.jboss.weld.examples.jsf.translator</groupId>
          <artifactId>weld-jsf-translator-ejb</artifactId>
@@ -35,25 +36,53 @@
          <artifactId>weld-jsf-translator-war</artifactId>
          <type>war</type>
       </dependency>
+      -->
    
       <dependency>
          <groupId>org.testng</groupId>
          <artifactId>testng</artifactId>
          <scope>test</scope>
-         <classifier>jdk15</classifier>
+         <classifier>${org.testng.testng.classifier}</classifier>
       </dependency>
       
-      <!-- <dependency>
-         <groupId>org.jboss.el</groupId>
-         <artifactId>jboss-el</artifactId>
+      <dependency>
+         <groupId>org.seleniumhq.selenium.core</groupId>
+         <artifactId>selenium-core</artifactId>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.seleniumhq.selenium.client-drivers</groupId>
+         <artifactId>selenium-java-client-driver</artifactId>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.test</groupId>
+         <artifactId>richfaces-selenium</artifactId>
+         <scope>test</scope>
+      </dependency>
+      
+      <!-- not sure why I included this one -->
+      <dependency>
+         <groupId>org.glassfish.web</groupId>
+         <artifactId>el-impl</artifactId>
+         <scope>compile</scope>
          <exclusions>
             <exclusion>
                <groupId>javax.el</groupId>
                <artifactId>el-api</artifactId>
             </exclusion>
          </exclusions>
-      </dependency>-->
+      </dependency>
       
+      <!-- or this one -->
+      <dependency>
+         <groupId>javax.faces</groupId>
+         <artifactId>jsf-api</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
    </dependencies>
 
    <profiles>
@@ -63,26 +92,8 @@
             <activeByDefault>false</activeByDefault>
          </activation>
 
-         <properties>
-            <ftest.artifact>ftest-translator</ftest.artifact>
-            <ftest.version>0.1${ftest.version.discriminator}</ftest.version>
-         </properties>
-
-         <dependencies>
-            <dependency>
-               <groupId>org.jboss.weld.examples.ftest</groupId>
-               <artifactId>${ftest.artifact}</artifactId>
-               <version>${ftest.version}</version>
-               <scope>test</scope>
-            </dependency>
-         </dependencies>
-
          <build>
             <plugins>
-               <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-dependency-plugin</artifactId>
-               </plugin>
                <plugin>
                   <groupId>org.codehaus.cargo</groupId>
                   <artifactId>cargo-maven2-plugin</artifactId>
@@ -108,26 +119,8 @@
             <activeByDefault>false</activeByDefault>
          </activation>
 
-         <properties>
-            <ftest.artifact>ftest-translator</ftest.artifact>
-            <ftest.version>0.1${ftest.version.discriminator}</ftest.version>
-         </properties>
-
-         <dependencies>
-            <dependency>
-               <groupId>org.jboss.weld.examples.ftest</groupId>
-               <artifactId>${ftest.artifact}</artifactId>
-               <version>${ftest.version}</version>
-               <scope>test</scope>
-            </dependency>
-         </dependencies>
-
          <build>
             <plugins>
-               <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-dependency-plugin</artifactId>
-               </plugin>
                <plugin>
                   <groupId>org.codehaus.cargo</groupId>
                   <artifactId>cargo-maven2-plugin</artifactId>
@@ -152,6 +145,9 @@
 
    <build>
       <finalName>weld-translator</finalName>
+      <testSourceDirectory>src/ftest/java</testSourceDirectory>
+      <testOutputDirectory>target/test</testOutputDirectory>
+      <defaultGoal>validate</defaultGoal>
       <plugins>
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>

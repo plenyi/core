@@ -26,7 +26,7 @@
          <groupId>org.testng</groupId>
          <artifactId>testng</artifactId>
          <scope>test</scope>
-         <classifier>jdk15</classifier>
+         <classifier>${org.testng.testng.classifier}</classifier>
       </dependency>
       
       <dependency>
@@ -38,6 +38,7 @@
       <dependency>
          <groupId>org.glassfish.web</groupId>
          <artifactId>el-impl</artifactId>
+         <scope>compile</scope>
          <exclusions>
             <exclusion>
                <groupId>javax.el</groupId>

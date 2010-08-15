@@ -17,13 +17,15 @@
 	--> 
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
 <suite name="Weld JSF Permalink example" verbose="2" parallel="false">
+   <!-- DEPRECATED BY RFS?
     <listeners>
 		<listener class-name="org.jboss.weld.example.common.test.selenium.WeldFunctionalTestListener" />
 	</listeners>
+   -->
 	<test name="permalink_jboss5x">
 		<parameter name="example.context.path" value="/weld-permalink" />
 		<packages>
-			<package name="org.jboss.weld.example.permalink.test.selenium" />
+			<package name="org.jboss.weld.examples.permalink.test.selenium" />
 		</packages>
 	</test>
 </suite>

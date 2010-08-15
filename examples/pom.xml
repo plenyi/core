@@ -86,25 +86,51 @@
 
    <properties>
       <!-- Override JSF version to 2.0 -->
-      <jsf.version>2.0.2-FCS</jsf.version>
-      <jetty.version>6.1.21</jetty.version>
+      <javax.faces.jsf-api.version>2.0.2-FCS</javax.faces.jsf-api.version>
       <!-- UEL Impl -->
-      <uel.version>2.2</uel.version>
+      <org.glassfish.web.el-impl.version>2.2</org.glassfish.web.el-impl.version>
       <!-- Testing deps -->
-      <selenium.java.client.version>1.0.1</selenium.java.client.version>
-      <selenium.maven.plugin.version>1.0</selenium.maven.plugin.version>
-      <cargo.maven2.plugin.version>1.0</cargo.maven2.plugin.version>
-      <failsafe.maven.plugin.version>2.4.3-alpha-1</failsafe.maven.plugin.version>
+      <org.seleniumhq.selenium.client-drivers.selenium-java-client-driver.version>1.0.1</org.seleniumhq.selenium.client-drivers.selenium-java-client-driver.version>
+      <org.codehaus.mojo.selenium-maven-plugin.version>1.0</org.codehaus.mojo.selenium-maven-plugin.version>
+      <org.codehaus.cargo.cargo-maven2-plugin.version>1.0</org.codehaus.cargo.cargo-maven2-plugin.version>
+      <org.codehaus.mojo.failsafe-maven-plugin.version>2.4.3-alpha-1</org.codehaus.mojo.failsafe-maven-plugin.version>
       <ant.junit.version>1.6.2</ant.junit.version>
       <ftest.version.discriminator />
       <selenium.browser>*firefoxproxy</selenium.browser>
-      <selenium.browser.url>http://localhost:8080</selenium.browser.url>
-      <selenium.server.port>14444</selenium.server.port>
-      <selenium.server.host>localhost</selenium.server.host>
+      <context.root>http://${context.host}:8080/</context.root> <!-- repalces selenium.browser.url -->
+      <selenium.port>14444</selenium.port> <!-- replaces selenium.server.port; uses old weld-examples-parent value -->
+      <selenium.host>localhost</selenium.host> <!-- replaces selenium.server.host -->
       <selenium.speed>0</selenium.speed>
       <selenium.timeout>30000</selenium.timeout>
       <selenium.debug>false</selenium.debug>
       <application.deploy.timeout>300</application.deploy.timeout>      
+      <!-- properties merged in from rfs-root -->
+      <org.jboss.test.richfaces-selenium.version>1.5.0.Final</org.jboss.test.richfaces-selenium.version>
+      <org.seleniumhq.selenium.core.selenium-core.version>1.0.1</org.seleniumhq.selenium.core.selenium-core.version>
+      <method>*</method>
+      <deployable.location></deployable.location>
+      <deployable.type>war</deployable.type>
+      <context.host>localhost</context.host>
+      <context.path>/</context.path>
+      <context.deploy.path>${context.path}</context.deploy.path>
+      <selenium.maximize>false</selenium.maximize> <!-- true to maximize browser window -->
+      <selenium.timeout.default>30000</selenium.timeout.default>
+      <selenium.timeout.gui>5000</selenium.timeout.gui>
+      <selenium.timeout.ajax>15000</selenium.timeout.ajax>
+      <selenium.timeout.model>30000</selenium.timeout.model>
+      <cargo.timeout.deploy>120000</cargo.timeout.deploy>
+      <cargo.jvmargs.additional />
+      <browserSessionReuse>true</browserSessionReuse>
+      <org.codehaus.mojo.failsafe-maven-plugin.conf.ftest-classes-dir>${project.build.directory}/test</org.codehaus.mojo.failsafe-maven-plugin.conf.ftest-classes-dir>
+      <org.codehaus.mojo.failsafe-maven-plugin.conf.suite-xml-dir>src/test/selenium</org.codehaus.mojo.failsafe-maven-plugin.conf.suite-xml-dir>
+      <selenium.log.dir>${project.build.directory}/ftest-logs</selenium.log.dir>
+      <resource.dir>${project.build.directory}/ftest</resource.dir>
+      <org.testng.testng.version>5.10</org.testng.testng.version>
+      <org.testng.testng.classifier>jdk15</org.testng.testng.classifier>
+      <org.jboss.weld.servlet.weld-servlet.version>1.1.0-SNAPSHOT</org.jboss.weld.servlet.weld-servlet.version>
+      <javax.servlet.jstl.version>RELEASE</javax.servlet.jstl.version>
+      <javax.enterprise.cdi-api.version>1.0-SP1</javax.enterprise.cdi-api.version>
+      <javax.annotation.jsr250-api.version>1.0</javax.annotation.jsr250-api.version>
    </properties>
 
    <dependencyManagement>
@@ -113,49 +139,75 @@
          <dependency>
             <groupId>javax.faces</groupId>
             <artifactId>jsf-api</artifactId>
-            <version>${jsf.version}</version>
-         </dependency>
-
-         <dependency>
-            <groupId>javax.faces</groupId>
-            <artifactId>jsf-impl</artifactId>
-            <version>${jsf.version}</version>
-         </dependency>
-
-         <dependency>
-            <groupId>org.mortbay.jetty</groupId>
-            <artifactId>jetty</artifactId>
-            <version>${jetty.version}</version>
-         </dependency>
-
-         <dependency>
-            <groupId>org.mortbay.jetty</groupId>
-            <artifactId>jetty-plus</artifactId>
-            <version>${jetty.version}</version>
-         </dependency>
-
-         <dependency>
-            <groupId>org.mortbay.jetty</groupId>
-            <artifactId>jsp-2.1-jetty</artifactId>
-            <version>${jetty.version}</version>
+            <version>${javax.faces.jsf-api.version}</version>
+            <scope>compile</scope> <!-- ALSO provided -->
          </dependency>
 
          <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>el-impl</artifactId>
-            <version>${uel.version}</version>
+            <version>${org.glassfish.web.el-impl.version}</version>
+            <scope>compile</scope> <!-- ALSO runtime -->
+         </dependency>
+
+         <dependency>
+            <groupId>org.seleniumhq.selenium.core</groupId>
+            <artifactId>selenium-core</artifactId>
+            <version>${org.seleniumhq.selenium.core.selenium-core.version}</version>
+            <scope>test</scope>
          </dependency>
 
          <dependency>
             <groupId>org.seleniumhq.selenium.client-drivers</groupId>
             <artifactId>selenium-java-client-driver</artifactId>
-            <version>${selenium.java.client.version}</version>
+            <version>${org.seleniumhq.selenium.client-drivers.selenium-java-client-driver.version}</version>
+            <scope>test</scope>
          </dependency>
 
+         <dependency>
+            <groupId>org.jboss.test</groupId>
+            <artifactId>richfaces-selenium</artifactId>
+            <version>${org.jboss.test.richfaces-selenium.version}</version>
+            <scope>test</scope>
+         </dependency>
+         
+         <dependency>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet</artifactId>
+            <version>${org.jboss.weld.servlet.weld-servlet.version}</version> <!-- HACK -->
+            <scope>runtime</scope> <!-- ALSO provided -->
+         </dependency>
+         
+         <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${javax.servlet.jstl.version}</version> <!-- HACK -->
+            <scope>runtime</scope>
+         </dependency>
+         
+         <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>jsr250-api</artifactId>
+            <version>${javax.annotation.jsr250-api.version}</version> <!-- HACK -->
+            <scope>compile</scope> <!-- ALSO provided -->
+         </dependency>
+         
+         <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>${javax.enterprise.cdi-api.version}</version> <!-- HACK -->
+            <scope>provided</scope>
+         </dependency>
+         
       </dependencies>
    </dependencyManagement>
 
    <build>
+      <sourceDirectory>src/main/java</sourceDirectory>
+      <testSourceDirectory>src/ftest/java</testSourceDirectory>
+      <outputDirectory>target/classes</outputDirectory>
+      <testOutputDirectory>target/ftest</testOutputDirectory>
+      <defaultGoal>validate</defaultGoal>
       <pluginManagement>
          <plugins>
             <plugin>
@@ -166,19 +218,29 @@
                </configuration>
             </plugin>
             <plugin>
-               <groupId>org.codehaus.cargo</groupId>
-               <artifactId>cargo-maven2-plugin</artifactId>
-               <version>${cargo.maven2.plugin.version}</version>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-war-plugin</artifactId>
+            </plugin>
+            <plugin>
+               <artifactId>maven-clean-plugin</artifactId>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
             <plugin>
                <groupId>org.codehaus.mojo</groupId>
-               <artifactId>selenium-maven-plugin</artifactId>
-               <version>${selenium.maven.plugin.version}</version>
+               <artifactId>tomcat-maven-plugin</artifactId>
+<!-- VARIABLE WITH NO VALUE
+               <version>${org.codehaus.mojo.tomcat-maven-plugin.version}</version>
+-->
             </plugin>
             <plugin>
-               <groupId>org.codehaus.mojo</groupId>
-               <artifactId>failsafe-maven-plugin</artifactId>
-               <version>${failsafe.maven.plugin.version}</version>
+               <groupId>org.mortbay.jetty</groupId>
+               <artifactId>maven-jetty-plugin</artifactId>
+<!-- VARIABLE WITH NO VALUE
+               <version>${org.mortbay.jetty.maven-jetty-plugin.version}</version>
+-->
             </plugin>
          </plugins>
       </pluginManagement>
@@ -190,55 +252,22 @@
          <activation>
             <activeByDefault>false</activeByDefault>
          </activation>
-
+         
          <properties>
             <ftest.testsuite>jboss5x.xml</ftest.testsuite>
          </properties>
 
-         <dependencies>
-            <dependency>
-               <groupId>org.seleniumhq.selenium.client-drivers</groupId>
-               <artifactId>selenium-java-client-driver</artifactId>
-               <scope>test</scope>
-            </dependency>
-         </dependencies>
-
          <build>
             <pluginManagement>
                <plugins>
-                  <!-- get functional tests from ftest artifact -->
-                  <plugin>
-                     <groupId>org.apache.maven.plugins</groupId>
-                     <artifactId>maven-dependency-plugin</artifactId>
-                     <executions>
-                        <execution>
-                           <id>copy-ftest</id>
-                           <phase>process-sources</phase>
-                           <goals>
-                              <goal>copy</goal>
-                           </goals>
-                           <configuration>
-                              <outputDirectory>${project.build.directory}/ftest</outputDirectory>
-                              <stripVersion>true</stripVersion>
-                              <artifactItems>
-                                 <artifactItem>
-                                    <groupId>org.jboss.weld.examples.ftest</groupId>
-                                    <artifactId>${ftest.artifact}</artifactId>
-                                    <overWrite>true</overWrite>
-                                 </artifactItem>
-                              </artifactItems>
-                           </configuration>
-                        </execution>
-                     </executions>
-                  </plugin>
-
                   <!-- deploy/undeploy application archive to/from container -->
                   <plugin>
                      <groupId>org.codehaus.cargo</groupId>
                      <artifactId>cargo-maven2-plugin</artifactId>
+                     <version>${org.codehaus.cargo.cargo-maven2-plugin.version}</version>
                      <configuration>
                         <container>
-                           <containerId>jboss5x</containerId>
+                           <containerId>jboss51x</containerId>
                            <type>remote</type>
                         </container>
                         <configuration>
@@ -267,6 +296,7 @@
                   <plugin>
                      <groupId>org.codehaus.mojo</groupId>
                      <artifactId>selenium-maven-plugin</artifactId>
+                     <version>${org.codehaus.mojo.selenium-maven-plugin.version}</version>
                      <executions>
                         <execution>
                            <id>start-selenium</id>
@@ -276,24 +306,13 @@
                            </goals>
                            <configuration>
                               <background>true</background>
-                              <port>${selenium.server.port}</port>
+                              <port>${selenium.port}</port>
                               <logOutput>true</logOutput>
+										<logFile>${selenium.log.dir}/selenium-server.log</logFile>
 										<browserSideLog>${selenium.debug}</browserSideLog>
 										<debug>${selenium.debug}</debug>
                            </configuration>
                         </execution>
-                        <!--
-                           this can't be used until plugin sends the
-                           right command, using Ant GET instead
-                        -->
-                        <!--
-                           <execution> <id>stop-selenium</id>
-                           <phase>post-integration-test</phase> <goals>
-                           <goal>stop-server</goal> </goals>
-                           <configuration>
-                           <port>${selenium.server.port}</port>
-                           </configuration> </execution>
-                        -->
                      </executions>
                   </plugin>
 
@@ -302,28 +321,28 @@
                      <groupId>org.codehaus.mojo</groupId>
                      <artifactId>failsafe-maven-plugin</artifactId>
                      <configuration>
-                        <testClassesDirectory>${project.build.directory}/ftest</testClassesDirectory>
+                        <testClassesDirectory>${org.codehaus.mojo.failsafe-maven-plugin.conf.ftest-classes-dir}</testClassesDirectory>
                         <suiteXmlFiles>
-                           <suiteXmlFile>src/test/selenium/${ftest.testsuite}</suiteXmlFile>
+                           <suiteXmlFile>${org.codehaus.mojo.failsafe-maven-plugin.conf.suite-xml-dir}/${ftest.testsuite}</suiteXmlFile>
                         </suiteXmlFiles>
                         <argLine>-Xmx748m</argLine>
                         <forkMode>once</forkMode>
                         <systemProperties>
                            <property>
-                              <name>selenium.server.port</name>
-                              <value>${selenium.server.port}</value>
+                              <name>selenium.port</name>
+                              <value>${selenium.port}</value>
                            </property>
                            <property>
-                              <name>selenium.server.host</name>
-                              <value>${selenium.server.host}</value>
+                              <name>selenium.host</name>
+                              <value>${selenium.host}</value>
                            </property>
                            <property>
                               <name>selenium.browser</name>
                               <value>${selenium.browser}</value>
                            </property>
                            <property>
-                              <name>selenium.browser.url</name>
-                              <value>${selenium.browser.url}</value>
+                              <name>context.root</name>
+                              <value>${context.root}</value>
                            </property>
                            <property>
                               <name>selenium.speed</name>
@@ -370,7 +389,7 @@
                            <phase>post-integration-test</phase>
                            <configuration>
                               <tasks>
-                                 <get taskname="selenium-shutdown" src="http://${selenium.server.host}:${selenium.server.port}/selenium-server/driver/?cmd=shutDownSeleniumServer" ignoreerrors="true" dest="${project.build.directory}/selenium.stop.msg" />
+                                 <get taskname="selenium-shutdown" src="http://${selenium.host}:${selenium.port}/selenium-server/driver/?cmd=shutDownSeleniumServer" ignoreerrors="true" dest="${selenium.log.dir}/selenium.stop.msg" />
                                  <echo taskname="selenium-shutdown" message="DGF Errors during shutdown are expected" />
                               </tasks>
                            </configuration>
@@ -394,50 +413,17 @@
             <ftest.testsuite>jboss5x.xml</ftest.testsuite>
          </properties>
 
-         <dependencies>
-            <dependency>
-               <groupId>org.seleniumhq.selenium.client-drivers</groupId>
-               <artifactId>selenium-java-client-driver</artifactId>
-               <scope>test</scope>
-            </dependency>
-         </dependencies>
-
          <build>
             <pluginManagement>
                <plugins>
-                  <!-- get functional tests from ftest artifact -->
-                  <plugin>
-                     <groupId>org.apache.maven.plugins</groupId>
-                     <artifactId>maven-dependency-plugin</artifactId>
-                     <executions>
-                        <execution>
-                           <id>copy-ftest</id>
-                           <phase>process-sources</phase>
-                           <goals>
-                              <goal>copy</goal>
-                           </goals>
-                           <configuration>
-                              <outputDirectory>${project.build.directory}/ftest</outputDirectory>
-                              <stripVersion>true</stripVersion>
-                              <artifactItems>
-                                 <artifactItem>
-                                    <groupId>org.jboss.weld.examples.ftest</groupId>
-                                    <artifactId>${ftest.artifact}</artifactId>
-                                    <overWrite>true</overWrite>
-                                 </artifactItem>
-                              </artifactItems>
-                           </configuration>
-                        </execution>
-                     </executions>
-                  </plugin>
-
                   <!-- deploy/undeploy application archive to/from container -->
                   <plugin>
                      <groupId>org.codehaus.cargo</groupId>
                      <artifactId>cargo-maven2-plugin</artifactId>
+                     <version>${org.codehaus.cargo.cargo-maven2-plugin.version}</version>
                      <configuration>
                         <container>
-                           <containerId>jboss5x</containerId>
+                           <containerId>jboss6x</containerId>
                            <type>remote</type>
                         </container>
                         <configuration>
@@ -466,6 +452,7 @@
                   <plugin>
                      <groupId>org.codehaus.mojo</groupId>
                      <artifactId>selenium-maven-plugin</artifactId>
+                     <version>${org.codehaus.mojo.selenium-maven-plugin.version}</version>
                      <executions>
                         <execution>
                            <id>start-selenium</id>
@@ -475,25 +462,13 @@
                            </goals>
                            <configuration>
                               <background>true</background>
-                              <port>${selenium.server.port}</port>
+                              <port>${selenium.port}</port>
                               <logOutput>true</logOutput>
-										<logFile>${project.build.directory}/selenium/selenium-server.log</logFile>
+										<logFile>${selenium.log.dir}/selenium-server.log</logFile>
 										<browserSideLog>${selenium.debug}</browserSideLog>
 										<debug>${selenium.debug}</debug>
                            </configuration>
                         </execution>
-                        <!--
-                           this can't be used until plugin sends the
-                           right command, using Ant GET instead
-                        -->
-                        <!--
-                           <execution> <id>stop-selenium</id>
-                           <phase>post-integration-test</phase> <goals>
-                           <goal>stop-server</goal> </goals>
-                           <configuration>
-                           <port>${selenium.server.port}</port>
-                           </configuration> </execution>
-                        -->
                      </executions>
                   </plugin>
 
@@ -501,29 +476,30 @@
                   <plugin>
                      <groupId>org.codehaus.mojo</groupId>
                      <artifactId>failsafe-maven-plugin</artifactId>
+                     <version>${org.codehaus.mojo.failsafe-maven-plugin.version}</version>
                      <configuration>
-                        <testClassesDirectory>${project.build.directory}/ftest</testClassesDirectory>
+                        <testClassesDirectory>${org.codehaus.mojo.failsafe-maven-plugin.conf.ftest-classes-dir}</testClassesDirectory>
                         <suiteXmlFiles>
-                           <suiteXmlFile>src/test/selenium/${ftest.testsuite}</suiteXmlFile>
+                           <suiteXmlFile>${org.codehaus.mojo.failsafe-maven-plugin.conf.suite-xml-dir}/${ftest.testsuite}</suiteXmlFile>
                         </suiteXmlFiles>
                         <argLine>-Xmx748m</argLine>
                         <forkMode>once</forkMode>
                         <systemProperties>
                            <property>
-                              <name>selenium.server.port</name>
-                              <value>${selenium.server.port}</value>
+                              <name>selenium.port</name>
+                              <value>${selenium.port}</value>
                            </property>
                            <property>
-                              <name>selenium.server.host</name>
-                              <value>${selenium.server.host}</value>
+                              <name>selenium.host</name>
+                              <value>${selenium.host}</value>
                            </property>
                            <property>
                               <name>selenium.browser</name>
                               <value>${selenium.browser}</value>
                            </property>
                            <property>
-                              <name>selenium.browser.url</name>
-                              <value>${selenium.browser.url}</value>
+                              <name>context.root</name>
+                              <value>${context.root}</value>
                            </property>
                            <property>
                               <name>selenium.speed</name>
@@ -570,7 +546,7 @@
                            <phase>post-integration-test</phase>
                            <configuration>
                               <tasks>
-                                 <get taskname="selenium-shutdown" src="http://${selenium.server.host}:${selenium.server.port}/selenium-server/driver/?cmd=shutDownSeleniumServer" ignoreerrors="true" dest="${project.build.directory}/selenium.stop.msg" />
+                                 <get taskname="selenium-shutdown" src="http://${selenium.host}:${selenium.port}/selenium-server/driver/?cmd=shutDownSeleniumServer" ignoreerrors="true" dest="${selenium.log.dir}/selenium.stop.msg" />
                                  <echo taskname="selenium-shutdown" message="DGF Errors during shutdown are expected" />
                               </tasks>
                            </configuration>
@@ -595,47 +571,14 @@
             <ftest.testsuite>jboss6x-cluster.xml</ftest.testsuite>
          </properties>
 
-         <dependencies>
-            <dependency>
-               <groupId>org.seleniumhq.selenium.client-drivers</groupId>
-               <artifactId>selenium-java-client-driver</artifactId>
-               <scope>test</scope>
-            </dependency>
-         </dependencies>
-
          <build>
             <pluginManagement>
                <plugins>
-                  <!-- get functional tests from ftest artifact -->
-                  <plugin>
-                     <groupId>org.apache.maven.plugins</groupId>
-                     <artifactId>maven-dependency-plugin</artifactId>
-                     <executions>
-                        <execution>
-                           <id>copy-ftest</id>
-                           <phase>process-sources</phase>
-                           <goals>
-                              <goal>copy</goal>
-                           </goals>
-                           <configuration>
-                              <outputDirectory>${project.build.directory}/ftest</outputDirectory>
-                              <stripVersion>true</stripVersion>
-                              <artifactItems>
-                                 <artifactItem>
-                                    <groupId>org.jboss.weld.examples.ftest</groupId>
-                                    <artifactId>${ftest.artifact}</artifactId>
-                                    <overWrite>true</overWrite>
-                                 </artifactItem>
-                              </artifactItems>
-                           </configuration>
-                        </execution>
-                     </executions>
-                  </plugin>
-
                   <!--  start Selenium server -->
                   <plugin>
                      <groupId>org.codehaus.mojo</groupId>
                      <artifactId>selenium-maven-plugin</artifactId>
+                     <version>${org.codehaus.mojo.selenium-maven-plugin.version}</version>
                      <executions>
                         <execution>
                            <id>start-selenium</id>
@@ -645,25 +588,13 @@
                            </goals>
                            <configuration>
                               <background>true</background>
-                              <port>${selenium.server.port}</port>
+                              <port>${selenium.port}</port>
                               <logOutput>true</logOutput>
-										<logFile>${project.build.directory}/selenium/selenium-server.log</logFile>
+										<logFile>${project.build.directory}/ftest-logs/selenium-server.log</logFile>
 										<browserSideLog>${selenium.debug}</browserSideLog>
 										<debug>${selenium.debug}</debug>
                            </configuration>
                         </execution>
-                        <!--
-                           this can't be used until plugin sends the
-                           right command, using Ant GET instead
-                        -->
-                        <!--
-                           <execution> <id>stop-selenium</id>
-                           <phase>post-integration-test</phase> <goals>
-                           <goal>stop-server</goal> </goals>
-                           <configuration>
-                           <port>${selenium.server.port}</port>
-                           </configuration> </execution>
-                        -->
                      </executions>
                   </plugin>
 
@@ -671,8 +602,9 @@
                   <plugin>
                      <groupId>org.codehaus.mojo</groupId>
                      <artifactId>failsafe-maven-plugin</artifactId>
+                     <version>${org.codehaus.mojo.failsafe-maven-plugin.version}</version>
                      <configuration>
-                        <testClassesDirectory>${project.build.directory}/ftest</testClassesDirectory>
+                        <testClassesDirectory>${project.build.directory}/classes</testClassesDirectory>
                         <suiteXmlFiles>
                            <suiteXmlFile>src/test/selenium/${ftest.testsuite}</suiteXmlFile>
                         </suiteXmlFiles>
@@ -680,20 +612,20 @@
                         <forkMode>once</forkMode>
                         <systemProperties>
                            <property>
-                              <name>selenium.server.port</name>
-                              <value>${selenium.server.port}</value>
+                              <name>selenium.port</name>
+                              <value>${selenium.port}</value>
                            </property>
                            <property>
-                              <name>selenium.server.host</name>
-                              <value>${selenium.server.host}</value>
+                              <name>selenium.host</name>
+                              <value>${selenium.host}</value>
                            </property>
                            <property>
                               <name>selenium.browser</name>
                               <value>${selenium.browser}</value>
                            </property>
                            <property>
-                              <name>selenium.browser.url</name>
-                              <value>${selenium.browser.url}</value>
+                              <name>context.root</name>
+                              <value>${context.root}</value>
                            </property>
                            <property>
                               <name>selenium.speed</name>
@@ -766,7 +698,7 @@
 									<echo message="Undeploying application..." />
 									<delete file="${jboss.master.configuration}/farm/${project.build.finalName}.${project.packaging}" />
 								
-									<get taskname="selenium-shutdown" src="http://${selenium.server.host}:${selenium.server.port}/selenium-server/driver/?cmd=shutDownSeleniumServer" ignoreerrors="true" dest="${project.build.directory}/selenium.stop.msg" />
+									<get taskname="selenium-shutdown" src="http://${selenium.host}:${selenium.port}/selenium-server/driver/?cmd=shutDownSeleniumServer" ignoreerrors="true" dest="${selenium.log.dir}/selenium.stop.msg" />
 									<echo taskname="selenium-shutdown" message="DGF Errors during shutdown are expected" />
 								</tasks>
 							</configuration>
@@ -783,5 +715,18 @@
       </profile>
       
    </profiles>
+   
+   <dependencies>
+      <dependency>
+         <groupId>org.seleniumhq.selenium.client-drivers</groupId>
+         <artifactId>selenium-java-client-driver</artifactId>
+         <scope>test</scope>
+      </dependency>      
+      <dependency>
+         <groupId>org.seleniumhq.selenium.core</groupId>
+         <artifactId>selenium-core</artifactId>
+         <scope>test</scope>
+      </dependency>
+   </dependencies>
 </project>
 

@@ -40,7 +40,7 @@
          <groupId>org.testng</groupId>
          <artifactId>testng</artifactId>
          <scope>test</scope>
-         <classifier>jdk15</classifier>
+         <classifier>${org.testng.testng.classifier}</classifier>
       </dependency>
 
       <dependency>
@@ -80,11 +80,33 @@
          <scope>provided</scope>
       </dependency>
 
+      <dependency>
+         <groupId>org.seleniumhq.selenium.core</groupId>
+         <artifactId>selenium-core</artifactId>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.seleniumhq.selenium.client-drivers</groupId>
+         <artifactId>selenium-java-client-driver</artifactId>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.test</groupId>
+         <artifactId>richfaces-selenium</artifactId>
+         <scope>test</scope>
+      </dependency>
+
    </dependencies>
 
    <build>
       <defaultGoal>package</defaultGoal>
       <finalName>weld-permalink</finalName>
+      <sourceDirectory>src/main/java</sourceDirectory>
+      <testSourceDirectory>src/ftest/java</testSourceDirectory>
+      <outputDirectory>target/classes</outputDirectory>
+      <testOutputDirectory>target/test</testOutputDirectory>
       <!--
       <finalName>${project.artifactId}</finalName>
       -->
@@ -132,11 +154,13 @@
             <dependency>
                <groupId>javax.annotation</groupId>
                <artifactId>jsr250-api</artifactId>
+               <scope>compile</scope>
             </dependency>
 
             <dependency>
                <groupId>javax.faces</groupId>
                <artifactId>jsf-api</artifactId>
+               <scope>compile</scope>
             </dependency>
 
             <dependency>
@@ -154,11 +178,13 @@
             <dependency>
                <groupId>javax.transaction</groupId>
                <artifactId>jta</artifactId>
+               <scope>compile</scope>
             </dependency>
 
             <dependency>
                <groupId>javax.validation</groupId>
                <artifactId>validation-api</artifactId>
+               <scope>compile</scope>
             </dependency>
 
             <dependency>
@@ -263,11 +289,13 @@
             <dependency>
                <groupId>javax.annotation</groupId>
                <artifactId>jsr250-api</artifactId>
+               <scope>compile</scope>
             </dependency>
 
             <dependency>
                <groupId>javax.faces</groupId>
                <artifactId>jsf-api</artifactId>
+               <scope>compile</scope>
             </dependency>
 
             <dependency>
@@ -279,11 +307,13 @@
             <dependency>
                <groupId>javax.transaction</groupId>
                <artifactId>jta</artifactId>
+               <scope>compile</scope>
             </dependency>
 
             <dependency>
                <groupId>javax.validation</groupId>
                <artifactId>validation-api</artifactId>
+               <scope>compile</scope>
             </dependency>
 
             <dependency>
@@ -363,32 +393,16 @@
          </build>
 
       </profile>
+
+      <!-- functional tests -->
       <profile>
          <id>ftest-jboss-remote-51</id>
          <activation>
             <activeByDefault>false</activeByDefault>
          </activation>
 
-         <properties>
-            <ftest.artifact>ftest-permalink</ftest.artifact>
-            <ftest.version>0.1${ftest.version.discriminator}</ftest.version>
-         </properties>
-
-         <dependencies>
-            <dependency>
-               <groupId>org.jboss.weld.examples.ftest</groupId>
-               <artifactId>${ftest.artifact}</artifactId>
-               <version>${ftest.version}</version>
-               <scope>test</scope>
-            </dependency>
-         </dependencies>
-
          <build>
             <plugins>
-               <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-dependency-plugin</artifactId>
-               </plugin>
                <plugin>
                   <groupId>org.codehaus.cargo</groupId>
                   <artifactId>cargo-maven2-plugin</artifactId>
@@ -414,26 +428,8 @@
             <activeByDefault>false</activeByDefault>
          </activation>
 
-         <properties>
-            <ftest.artifact>ftest-permalink</ftest.artifact>
-            <ftest.version>0.1${ftest.version.discriminator}</ftest.version>
-         </properties>
-
-         <dependencies>
-            <dependency>
-               <groupId>org.jboss.weld.examples.ftest</groupId>
-               <artifactId>${ftest.artifact}</artifactId>
-               <version>${ftest.version}</version>
-               <scope>test</scope>
-            </dependency>
-         </dependencies>
-
          <build>
             <plugins>
-               <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-dependency-plugin</artifactId>
-               </plugin>
                <plugin>
                   <groupId>org.codehaus.cargo</groupId>
                   <artifactId>cargo-maven2-plugin</artifactId>
