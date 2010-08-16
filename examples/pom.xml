@@ -1,23 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-   <modelVersion>4.0.0</modelVersion>
+
+   <!--   WELD-PARENT   BETA   -->
+   
    <parent>
       <groupId>org.jboss.weld</groupId>
       <artifactId>weld-core-parent</artifactId>
       <version>1.1.0-SNAPSHOT</version>
       <relativePath>../parent/pom.xml</relativePath>
    </parent>
+
+   <modelVersion>4.0.0</modelVersion>
    <groupId>org.jboss.weld.examples</groupId>
    <artifactId>weld-examples-parent</artifactId>
    <packaging>pom</packaging>
    <name>Weld Examples</name>
-
-   <description>
-      Examples for Weld, the reference implementation of JSR 299: Contexts and Dependency Injection for Java EE
-   </description>
-
+   <description>Examples for Weld, the reference implementation of JSR 299: Contexts and Dependency Injection for Java EE</description>
    <url>http://www.seamframework.org/Weld</url>
-
+   
+   <issueManagement>
+      <system>JIRA</system>
+      <url>http://jira.jboss.org/browse/WELD</url>
+   </issueManagement>
+   
+   <ciManagement>
+      <system>Hudson</system>
+      <url>http://hudson.jboss.org</url>
+   </ciManagement>
+   
+   <inceptionYear>2008</inceptionYear>
+   
    <developers>
       <developer>
          <name>Pete Muir</name>
@@ -28,188 +40,44 @@
          <organization>JBoss, a division of Red Hat</organization>
          <url>http://in.relation.to/Bloggers/Pete</url>
       </developer>
-
       <developer>
          <name>Shane Bryzak</name>
          <organization>JBoss, a division of Red Hat</organization>
       </developer>
-
       <developer>
          <name>David Allen</name>
       </developer>
-
       <developer>
          <name>Nicklas Karlsson</name>
       </developer>
-
       <developer>
          <name>Clint Popetz</name>
       </developer>
-
       <developer>
          <name>Pete Royle</name>
       </developer>
-
    </developers>
-   <ciManagement>
-      <system>Hudson</system>
-      <url>http://hudson.jboss.org</url>
-   </ciManagement>
-
-   <issueManagement>
-      <system>JIRA</system>
-      <url>http://jira.jboss.org/browse/WELD</url>
-   </issueManagement>
-
-   <organization>
-      <name>Seam Framework</name>
-      <url>http://seamframework.org</url>
-   </organization>
-
-   <inceptionYear>2008</inceptionYear>
-
+   
    <licenses>
       <license>
          <name>Apache License, Version 2.0</name>
-         <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+         <distribution>repo</distribution>
+         <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
       </license>
    </licenses>
-
-   <modules>
-      <module>jsf/numberguess</module>
-      <module>jsf/translator</module>
-      <module>jsf/login</module>
-      <module>jsf/permalink</module>
-      <module>se/numberguess</module>
-      <module>se/hello-world</module>
-   </modules>
-
-   <properties>
-      <!-- Override JSF version to 2.0 -->
-      <javax.faces.jsf-api.version>2.0.2-FCS</javax.faces.jsf-api.version>
-      <!-- UEL Impl -->
-      <org.glassfish.web.el-impl.version>2.2</org.glassfish.web.el-impl.version>
-      <!-- Testing deps -->
-      <org.seleniumhq.selenium.client-drivers.selenium-java-client-driver.version>1.0.1</org.seleniumhq.selenium.client-drivers.selenium-java-client-driver.version>
-      <org.codehaus.mojo.selenium-maven-plugin.version>1.0</org.codehaus.mojo.selenium-maven-plugin.version>
-      <org.codehaus.cargo.cargo-maven2-plugin.version>1.0</org.codehaus.cargo.cargo-maven2-plugin.version>
-      <org.codehaus.mojo.failsafe-maven-plugin.version>2.4.3-alpha-1</org.codehaus.mojo.failsafe-maven-plugin.version>
-      <ant.junit.version>1.6.2</ant.junit.version>
-      <ftest.version.discriminator />
-      <selenium.browser>*firefoxproxy</selenium.browser>
-      <context.root>http://${context.host}:8080/</context.root> <!-- repalces selenium.browser.url -->
-      <selenium.port>14444</selenium.port> <!-- replaces selenium.server.port; uses old weld-examples-parent value -->
-      <selenium.host>localhost</selenium.host> <!-- replaces selenium.server.host -->
-      <selenium.speed>0</selenium.speed>
-      <selenium.timeout>30000</selenium.timeout>
-      <selenium.debug>false</selenium.debug>
-      <application.deploy.timeout>300</application.deploy.timeout>      
-      <!-- properties merged in from rfs-root -->
-      <org.jboss.test.richfaces-selenium.version>1.5.0.Final</org.jboss.test.richfaces-selenium.version>
-      <org.seleniumhq.selenium.core.selenium-core.version>1.0.1</org.seleniumhq.selenium.core.selenium-core.version>
-      <method>*</method>
-      <deployable.location></deployable.location>
-      <deployable.type>war</deployable.type>
-      <context.host>localhost</context.host>
-      <context.path>/</context.path>
-      <context.deploy.path>${context.path}</context.deploy.path>
-      <selenium.maximize>false</selenium.maximize> <!-- true to maximize browser window -->
-      <selenium.timeout.default>30000</selenium.timeout.default>
-      <selenium.timeout.gui>5000</selenium.timeout.gui>
-      <selenium.timeout.ajax>15000</selenium.timeout.ajax>
-      <selenium.timeout.model>30000</selenium.timeout.model>
-      <cargo.timeout.deploy>120000</cargo.timeout.deploy>
-      <cargo.jvmargs.additional />
-      <browserSessionReuse>true</browserSessionReuse>
-      <org.codehaus.mojo.failsafe-maven-plugin.conf.ftest-classes-dir>${project.build.directory}/test</org.codehaus.mojo.failsafe-maven-plugin.conf.ftest-classes-dir>
-      <org.codehaus.mojo.failsafe-maven-plugin.conf.suite-xml-dir>src/test/selenium</org.codehaus.mojo.failsafe-maven-plugin.conf.suite-xml-dir>
-      <selenium.log.dir>${project.build.directory}/ftest-logs</selenium.log.dir>
-      <resource.dir>${project.build.directory}/ftest</resource.dir>
-      <org.testng.testng.version>5.10</org.testng.testng.version>
-      <org.testng.testng.classifier>jdk15</org.testng.testng.classifier>
-      <org.jboss.weld.servlet.weld-servlet.version>1.1.0-SNAPSHOT</org.jboss.weld.servlet.weld-servlet.version>
-      <javax.servlet.jstl.version>RELEASE</javax.servlet.jstl.version>
-      <javax.enterprise.cdi-api.version>1.0-SP1</javax.enterprise.cdi-api.version>
-      <javax.annotation.jsr250-api.version>1.0</javax.annotation.jsr250-api.version>
-   </properties>
-
-   <dependencyManagement>
-      <dependencies>
-
-         <dependency>
-            <groupId>javax.faces</groupId>
-            <artifactId>jsf-api</artifactId>
-            <version>${javax.faces.jsf-api.version}</version>
-            <scope>compile</scope> <!-- ALSO provided -->
-         </dependency>
-
-         <dependency>
-            <groupId>org.glassfish.web</groupId>
-            <artifactId>el-impl</artifactId>
-            <version>${org.glassfish.web.el-impl.version}</version>
-            <scope>compile</scope> <!-- ALSO runtime -->
-         </dependency>
-
-         <dependency>
-            <groupId>org.seleniumhq.selenium.core</groupId>
-            <artifactId>selenium-core</artifactId>
-            <version>${org.seleniumhq.selenium.core.selenium-core.version}</version>
-            <scope>test</scope>
-         </dependency>
-
-         <dependency>
-            <groupId>org.seleniumhq.selenium.client-drivers</groupId>
-            <artifactId>selenium-java-client-driver</artifactId>
-            <version>${org.seleniumhq.selenium.client-drivers.selenium-java-client-driver.version}</version>
-            <scope>test</scope>
-         </dependency>
-
-         <dependency>
-            <groupId>org.jboss.test</groupId>
-            <artifactId>richfaces-selenium</artifactId>
-            <version>${org.jboss.test.richfaces-selenium.version}</version>
-            <scope>test</scope>
-         </dependency>
-         
-         <dependency>
-            <groupId>org.jboss.weld.servlet</groupId>
-            <artifactId>weld-servlet</artifactId>
-            <version>${org.jboss.weld.servlet.weld-servlet.version}</version> <!-- HACK -->
-            <scope>runtime</scope> <!-- ALSO provided -->
-         </dependency>
-         
-         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>${javax.servlet.jstl.version}</version> <!-- HACK -->
-            <scope>runtime</scope>
-         </dependency>
-         
-         <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>jsr250-api</artifactId>
-            <version>${javax.annotation.jsr250-api.version}</version> <!-- HACK -->
-            <scope>compile</scope> <!-- ALSO provided -->
-         </dependency>
-         
-         <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <version>${javax.enterprise.cdi-api.version}</version> <!-- HACK -->
-            <scope>provided</scope>
-         </dependency>
-         
-      </dependencies>
-   </dependencyManagement>
-
+   
    <build>
-      <sourceDirectory>src/main/java</sourceDirectory>
-      <testSourceDirectory>src/ftest/java</testSourceDirectory>
-      <outputDirectory>target/classes</outputDirectory>
-      <testOutputDirectory>target/ftest</testOutputDirectory>
-      <defaultGoal>validate</defaultGoal>
       <pluginManagement>
          <plugins>
+            <plugin>
+               <artifactId>maven-clean-plugin</artifactId>
+            </plugin>
+            
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            
             <plugin>
                <groupId>org.apache.maven.plugins</groupId>
                <artifactId>maven-ejb-plugin</artifactId>
@@ -217,17 +85,12 @@
                   <ejbVersion>3.0</ejbVersion>
                </configuration>
             </plugin>
+            
             <plugin>
                <groupId>org.apache.maven.plugins</groupId>
                <artifactId>maven-war-plugin</artifactId>
             </plugin>
-            <plugin>
-               <artifactId>maven-clean-plugin</artifactId>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
+            
             <plugin>
                <groupId>org.codehaus.mojo</groupId>
                <artifactId>tomcat-maven-plugin</artifactId>
@@ -235,6 +98,7 @@
                <version>${org.codehaus.mojo.tomcat-maven-plugin.version}</version>
 -->
             </plugin>
+            
             <plugin>
                <groupId>org.mortbay.jetty</groupId>
                <artifactId>maven-jetty-plugin</artifactId>
@@ -245,26 +109,66 @@
          </plugins>
       </pluginManagement>
    </build>
-
+   
+<!-- PROFILES DEFINED -->
    <profiles>
+      <!-- PROFILE USED TO RUN FTESTS ON JBOSS AS 5.1.* -->
       <profile>
          <id>ftest-jboss-remote-51</id>
+         
          <activation>
             <activeByDefault>false</activeByDefault>
          </activation>
          
-         <properties>
-            <ftest.testsuite>jboss5x.xml</ftest.testsuite>
-         </properties>
-
          <build>
             <pluginManagement>
                <plugins>
-                  <!-- deploy/undeploy application archive to/from container -->
+                  <!-- BUILD FTESTS -->
+                  <plugin>
+                     <groupId>org.apache.maven.plugins</groupId>
+                     <artifactId>maven-compiler-plugin</artifactId>
+                     <version>${maven-compiler.version}</version>
+                     
+                     <executions>
+                        <execution>
+                           <id>ftest-compile</id>
+                           <phase>pre-integration-test</phase>
+                           <goals>
+                              <goal>test-compile</goal>
+                           </goals>
+                        </execution>
+                     </executions>
+                     
+                     <configuration>
+                        <testSource>${ftest-sources-dir}</testSource>
+                        <testTarget>${ftest-classes-dir}</testTarget>
+                     </configuration>
+                  </plugin>
+               
+                  <!-- DEPLOY/UNDEPLOY APPLICATION ARCHIVE TO/FROM CONTAINER -->
                   <plugin>
                      <groupId>org.codehaus.cargo</groupId>
                      <artifactId>cargo-maven2-plugin</artifactId>
-                     <version>${org.codehaus.cargo.cargo-maven2-plugin.version}</version>
+                     <version>${cargo-maven2.version}</version>
+                     
+                     <executions>
+                        <execution>
+                           <id>deploy</id>
+                           <phase>pre-integration-test</phase>
+                           <goals>
+                              <goal>deploy</goal>
+                           </goals>
+                        </execution>
+                        
+                        <execution>
+                           <id>undeploy</id>
+                           <phase>post-integration-test</phase>
+                           <goals>
+                              <goal>undeploy</goal>
+                           </goals>
+                        </execution>
+                     </executions>
+                     
                      <configuration>
                         <container>
                            <containerId>jboss51x</containerId>
@@ -274,29 +178,14 @@
                            <type>runtime</type>
                         </configuration>
                      </configuration>
-                     <executions>
-                        <execution>
-                           <id>deploy</id>
-                           <phase>pre-integration-test</phase>
-                           <goals>
-                              <goal>deploy</goal>
-                           </goals>
-                        </execution>
-                        <execution>
-                           <id>undeploy</id>
-                           <phase>post-integration-test</phase>
-                           <goals>
-                              <goal>undeploy</goal>
-                           </goals>
-                        </execution>
-                     </executions>
                   </plugin>
-
-                  <!--  start Selenium server -->
+                  
+                  <!-- START SELENIUM SERVER -->
                   <plugin>
                      <groupId>org.codehaus.mojo</groupId>
                      <artifactId>selenium-maven-plugin</artifactId>
-                     <version>${org.codehaus.mojo.selenium-maven-plugin.version}</version>
+                     <version>${selenium-maven.version}</version>
+                     
                      <executions>
                         <execution>
                            <id>start-selenium</id>
@@ -308,22 +197,42 @@
                               <background>true</background>
                               <port>${selenium.port}</port>
                               <logOutput>true</logOutput>
-										<logFile>${selenium.log.dir}/selenium-server.log</logFile>
-										<browserSideLog>${selenium.debug}</browserSideLog>
-										<debug>${selenium.debug}</debug>
+                              <logFile>${selenium.log.dir}/selenium-server.log</logFile>
+                              <browserSideLog>${selenium.debug}</browserSideLog>
+                              <debug>${selenium.debug}</debug>
                            </configuration>
                         </execution>
                      </executions>
                   </plugin>
-
-                  <!-- run functional tests -->
+                  
+                  <!-- RUN FTESTS -->
                   <plugin>
                      <groupId>org.codehaus.mojo</groupId>
                      <artifactId>failsafe-maven-plugin</artifactId>
+                     <version>${failsafe-maven.version}</version>
+                     
+                     <executions>
+                        <execution>
+                           <id>verify</id>
+                           <phase>verify</phase>
+                           <goals>
+                              <goal>verify</goal>
+                           </goals>
+                        </execution>
+                        
+                        <execution>
+                           <id>integration-test</id>
+                           <phase>integration-test</phase>
+                           <goals>
+                              <goal>integration-test</goal>
+                           </goals>
+                        </execution>
+                     </executions>
+                     
                      <configuration>
-                        <testClassesDirectory>${org.codehaus.mojo.failsafe-maven-plugin.conf.ftest-classes-dir}</testClassesDirectory>
+                        <testClassesDirectory>${ftest-classes-dir}</testClassesDirectory>
                         <suiteXmlFiles>
-                           <suiteXmlFile>${org.codehaus.mojo.failsafe-maven-plugin.conf.suite-xml-dir}/${ftest.testsuite}</suiteXmlFile>
+                           <suiteXmlFile>${suite-xml-dir}/${ftest.testsuite}</suiteXmlFile>
                         </suiteXmlFiles>
                         <argLine>-Xmx748m</argLine>
                         <forkMode>once</forkMode>
@@ -358,69 +267,115 @@
                            </property>
                         </systemProperties>
                      </configuration>
-                     <executions>
-                        <execution>
-                           <id>integration-test</id>
-                           <phase>integration-test</phase>
-                           <goals>
-                              <goal>integration-test</goal>
-                           </goals>
-                        </execution>
-                        <execution>
-                           <id>verify</id>
-                           <phase>verify</phase>
-                           <goals>
-                              <goal>verify</goal>
-                           </goals>
-                        </execution>
-                     </executions>
                   </plugin>
-
-
-                  <!-- stop Selenium -->
+                  
+                  <!-- STOP SELENIUM SERVER -->
                   <plugin>
                      <groupId>org.apache.maven.plugins</groupId>
                      <artifactId>maven-antrun-plugin</artifactId>
-
+                     
                      <executions>
-                        <!-- this ant script runs testng natively -->
                         <execution>
                            <id>stop-selenium</id>
                            <phase>post-integration-test</phase>
-                           <configuration>
-                              <tasks>
-                                 <get taskname="selenium-shutdown" src="http://${selenium.host}:${selenium.port}/selenium-server/driver/?cmd=shutDownSeleniumServer" ignoreerrors="true" dest="${selenium.log.dir}/selenium.stop.msg" />
-                                 <echo taskname="selenium-shutdown" message="DGF Errors during shutdown are expected" />
-                              </tasks>
-                           </configuration>
                            <goals>
                               <goal>run</goal>
                            </goals>
+                           <configuration>
+                              <tasks>
+                                 <get taskname="selenium-shutdown" src="http://${selenium.host}:${selenium.port}/selenium-server/driver/?cmd=shutDownSeleniumServer" ignoreerrors="true" dest="${selenium.log.dir}/selenium.stop.msg" />
+                                 <echo taskname="selenium-shutdown" message="DGF Errors during shutdown are expected." />
+                              </tasks>
+                           </configuration>
                         </execution>
                      </executions>
                   </plugin>
                </plugins>
             </pluginManagement>
          </build>
+         
+         <dependencies>
+            <dependency>
+               <groupId>org.seleniumhq.selenium.client-drivers</groupId>
+               <artifactId>selenium-java-client-driver</artifactId>
+               <scope>test</scope>
+            </dependency>
+            <dependency>
+               <groupId>org.seleniumhq.selenium.core</groupId>
+               <artifactId>selenium-core</artifactId>
+               <scope>test</scope>
+            </dependency>
+            <dependency>
+               <groupId>org.jboss.test</groupId>
+               <artifactId>richfaces-selenium</artifactId>
+               <scope>test</scope>
+            </dependency>
+         </dependencies>
+         
+         <properties>
+            <ftest.testsuite>
+               jboss5x.xml
+            </ftest.testsuite>
+         </properties>
       </profile>
+      
+      <!-- PROFILE USED TO RUN FTESTS ON JBOSS AS 6.0.* -->
       <profile>
          <id>ftest-jboss-remote-60</id>
+         
          <activation>
             <activeByDefault>false</activeByDefault>
          </activation>
-
-         <properties>
-            <ftest.testsuite>jboss5x.xml</ftest.testsuite>
-         </properties>
-
+         
          <build>
             <pluginManagement>
                <plugins>
-                  <!-- deploy/undeploy application archive to/from container -->
+                  <!-- BUILD FTESTS -->
+                  <plugin>
+                     <groupId>org.apache.maven.plugins</groupId>
+                     <artifactId>maven-compiler-plugin</artifactId>
+                     <version>${maven-compiler.version}</version>
+                     
+                     <executions>
+                        <execution>
+                           <id>ftest-compile</id>
+                           <phase>pre-integration-test</phase>
+                           <goals>
+                              <goal>test-compile</goal>
+                           </goals>
+                        </execution>
+                     </executions>
+                     
+                     <configuration>
+                        <testSource>${ftest-sources-dir}</testSource>
+                        <testTarget>${ftest-classes-dir}</testTarget>
+                     </configuration>
+                  </plugin>
+                  
+                  <!-- DEPLOY/UNDEPLOY APPLICATION ARCHIVE TO/FROM CONTAINER -->
                   <plugin>
                      <groupId>org.codehaus.cargo</groupId>
                      <artifactId>cargo-maven2-plugin</artifactId>
-                     <version>${org.codehaus.cargo.cargo-maven2-plugin.version}</version>
+                     <version>${cargo-maven2.version}</version>
+                     
+                     <executions>
+                        <execution>
+                           <id>deploy</id>
+                           <phase>pre-integration-test</phase>
+                           <goals>
+                              <goal>deploy</goal>
+                           </goals>
+                        </execution>
+                        
+                        <execution>
+                           <id>undeploy</id>
+                           <phase>post-integration-test</phase>
+                           <goals>
+                              <goal>undeploy</goal>
+                           </goals>
+                        </execution>
+                     </executions>
+                     
                      <configuration>
                         <container>
                            <containerId>jboss6x</containerId>
@@ -430,29 +385,14 @@
                            <type>runtime</type>
                         </configuration>
                      </configuration>
-                     <executions>
-                        <execution>
-                           <id>deploy</id>
-                           <phase>pre-integration-test</phase>
-                           <goals>
-                              <goal>deploy</goal>
-                           </goals>
-                        </execution>
-                        <execution>
-                           <id>undeploy</id>
-                           <phase>post-integration-test</phase>
-                           <goals>
-                              <goal>undeploy</goal>
-                           </goals>
-                        </execution>
-                     </executions>
                   </plugin>
-
-                  <!--  start Selenium server -->
+                  
+                  <!-- START SELENIUM SERVER -->
                   <plugin>
                      <groupId>org.codehaus.mojo</groupId>
                      <artifactId>selenium-maven-plugin</artifactId>
-                     <version>${org.codehaus.mojo.selenium-maven-plugin.version}</version>
+                     <version>${selenium-maven.version}</version>
+                     
                      <executions>
                         <execution>
                            <id>start-selenium</id>
@@ -464,23 +404,42 @@
                               <background>true</background>
                               <port>${selenium.port}</port>
                               <logOutput>true</logOutput>
-										<logFile>${selenium.log.dir}/selenium-server.log</logFile>
-										<browserSideLog>${selenium.debug}</browserSideLog>
-										<debug>${selenium.debug}</debug>
+                              <logFile>${selenium.log.dir}/selenium-server.log</logFile>
+                              <browserSideLog>${selenium.debug}</browserSideLog>
+                              <debug>${selenium.debug}</debug>
                            </configuration>
                         </execution>
                      </executions>
                   </plugin>
-
-                  <!-- run functional tests -->
+                  
+                  <!-- RUN FTESTS -->
                   <plugin>
                      <groupId>org.codehaus.mojo</groupId>
                      <artifactId>failsafe-maven-plugin</artifactId>
-                     <version>${org.codehaus.mojo.failsafe-maven-plugin.version}</version>
+                     <version>${failsafe-maven.version}</version>
+                     
+                     <executions>
+                        <execution>
+                           <id>verify</id>
+                           <phase>verify</phase>
+                           <goals>
+                              <goal>verify</goal>
+                           </goals>
+                        </execution>
+                        
+                        <execution>
+                           <id>integration-test</id>
+                           <phase>integration-test</phase>
+                           <goals>
+                              <goal>integration-test</goal>
+                           </goals>
+                        </execution>
+                     </executions>
+                     
                      <configuration>
-                        <testClassesDirectory>${org.codehaus.mojo.failsafe-maven-plugin.conf.ftest-classes-dir}</testClassesDirectory>
+                        <testClassesDirectory>${ftest-classes-dir}</testClassesDirectory>
                         <suiteXmlFiles>
-                           <suiteXmlFile>${org.codehaus.mojo.failsafe-maven-plugin.conf.suite-xml-dir}/${ftest.testsuite}</suiteXmlFile>
+                           <suiteXmlFile>${suite-xml-dir}/${ftest.testsuite}</suiteXmlFile>
                         </suiteXmlFiles>
                         <argLine>-Xmx748m</argLine>
                         <forkMode>once</forkMode>
@@ -515,70 +474,97 @@
                            </property>
                         </systemProperties>
                      </configuration>
-                     <executions>
-                        <execution>
-                           <id>integration-test</id>
-                           <phase>integration-test</phase>
-                           <goals>
-                              <goal>integration-test</goal>
-                           </goals>
-                        </execution>
-                        <execution>
-                           <id>verify</id>
-                           <phase>verify</phase>
-                           <goals>
-                              <goal>verify</goal>
-                           </goals>
-                        </execution>
-                     </executions>
                   </plugin>
-
-
-                  <!-- stop Selenium -->
+                  
+                  <!-- STOP SELENIUM SERVER -->
                   <plugin>
                      <groupId>org.apache.maven.plugins</groupId>
                      <artifactId>maven-antrun-plugin</artifactId>
-
+                     
                      <executions>
-                        <!-- this ant script runs testng natively -->
                         <execution>
                            <id>stop-selenium</id>
                            <phase>post-integration-test</phase>
-                           <configuration>
-                              <tasks>
-                                 <get taskname="selenium-shutdown" src="http://${selenium.host}:${selenium.port}/selenium-server/driver/?cmd=shutDownSeleniumServer" ignoreerrors="true" dest="${selenium.log.dir}/selenium.stop.msg" />
-                                 <echo taskname="selenium-shutdown" message="DGF Errors during shutdown are expected" />
-                              </tasks>
-                           </configuration>
                            <goals>
                               <goal>run</goal>
                            </goals>
+                           <configuration>
+                              <tasks>
+                                 <get taskname="selenium-shutdown" src="http://${selenium.host}:${selenium.port}/selenium-server/driver/?cmd=shutDownSeleniumServer" ignoreerrors="true" dest="${selenium.log.dir}/selenium.stop.msg" />
+                                 <echo taskname="selenium-shutdown" message="DGF Errors during shutdown are expected." />
+                              </tasks>
+                           </configuration>
                         </execution>
                      </executions>
                   </plugin>
                </plugins>
             </pluginManagement>
          </build>
+         
+         <dependencies>
+            <dependency>
+               <groupId>org.seleniumhq.selenium.client-drivers</groupId>
+               <artifactId>selenium-java-client-driver</artifactId>
+               <scope>test</scope>
+            </dependency>
+            <dependency>
+               <groupId>org.seleniumhq.selenium.core</groupId>
+               <artifactId>selenium-core</artifactId>
+               <scope>test</scope>
+            </dependency>
+            <dependency>
+               <groupId>org.jboss.test</groupId>
+               <artifactId>richfaces-selenium</artifactId>
+               <scope>test</scope>
+            </dependency>
+         </dependencies>
+         
+         <properties>
+            <ftest.testsuite>
+               jboss5x.xml
+            </ftest.testsuite>
+         </properties>
       </profile>
       
+      <!-- PROFILE USED TO RUN CLUSTERING FTESTS ON JBOSS AS 6.0.* -->
       <profile>
          <id>ftest-jboss-cluster-60</id>
+         
          <activation>
             <activeByDefault>false</activeByDefault>
          </activation>
-
-         <properties>
-            <ftest.testsuite>jboss6x-cluster.xml</ftest.testsuite>
-         </properties>
-
+         
          <build>
             <pluginManagement>
                <plugins>
-                  <!--  start Selenium server -->
+                  <!-- BUILD FTESTS -->
+                  <plugin>
+                     <groupId>org.apache.maven.plugins</groupId>
+                     <artifactId>maven-compiler-plugin</artifactId>
+                     <version>${maven-compiler.version}</version>
+                     
+                     <executions>
+                        <execution>
+                           <id>ftest-compile</id>
+                           <phase>pre-integration-test</phase>
+                           <goals>
+                              <goal>test-compile</goal>
+                           </goals>
+                        </execution>
+                     </executions>
+                     
+                     <configuration>
+                        <testSource>${ftest-sources-dir}</testSource>
+                        <testTarget>${ftest-classes-dir}</testTarget>
+                     </configuration>
+                  </plugin>
+                  
+                  <!-- START SELENIUM SERVER -->
                   <plugin>
                      <groupId>org.codehaus.mojo</groupId>
                      <artifactId>selenium-maven-plugin</artifactId>
-                     <version>${org.codehaus.mojo.selenium-maven-plugin.version}</version>
+                     <version>${selenium-maven.version}</version>
+                     
                      <executions>
                         <execution>
                            <id>start-selenium</id>
@@ -590,23 +576,42 @@
                               <background>true</background>
                               <port>${selenium.port}</port>
                               <logOutput>true</logOutput>
-										<logFile>${project.build.directory}/ftest-logs/selenium-server.log</logFile>
-										<browserSideLog>${selenium.debug}</browserSideLog>
-										<debug>${selenium.debug}</debug>
+                              <logFile>${selenium.log.dir}/selenium-server.log</logFile>
+                              <browserSideLog>${selenium.debug}</browserSideLog>
+                              <debug>${selenium.debug}</debug>
                            </configuration>
                         </execution>
                      </executions>
                   </plugin>
-
-                  <!-- run functional tests -->
+                  
+                  <!-- RUN FTESTS -->
                   <plugin>
                      <groupId>org.codehaus.mojo</groupId>
                      <artifactId>failsafe-maven-plugin</artifactId>
-                     <version>${org.codehaus.mojo.failsafe-maven-plugin.version}</version>
+                     <version>${failsafe-maven.version}</version>
+                     
+                     <executions>
+                        <execution>
+                           <id>verify</id>
+                           <phase>verify</phase>
+                           <goals>
+                              <goal>verify</goal>
+                           </goals>
+                        </execution>
+                        
+                        <execution>
+                           <id>integration-test</id>
+                           <phase>integration-test</phase>
+                           <goals>
+                              <goal>integration-test</goal>
+                           </goals>
+                        </execution>
+                     </executions>
+                     
                      <configuration>
-                        <testClassesDirectory>${project.build.directory}/classes</testClassesDirectory>
+                        <testClassesDirectory>${ftest-classes-dir}</testClassesDirectory>
                         <suiteXmlFiles>
-                           <suiteXmlFile>src/test/selenium/${ftest.testsuite}</suiteXmlFile>
+                           <suiteXmlFile>${suite-xml-dir}/${ftest.testsuite}</suiteXmlFile>
                         </suiteXmlFiles>
                         <argLine>-Xmx748m</argLine>
                         <forkMode>once</forkMode>
@@ -639,94 +644,320 @@
                               <name>basedir</name>
                               <value>${basedir}</value>
                            </property>
-                           <property>
-                              <name>jboss.config</name>
-                              <value>${jboss.master.configuration}</value>
-                           </property>
                         </systemProperties>
                      </configuration>
-                     <executions>
-                        <execution>
-                           <id>integration-test</id>
-                           <phase>integration-test</phase>
-                           <goals>
-                              <goal>integration-test</goal>
-                           </goals>
-                        </execution>
-                        <execution>
-                           <id>verify</id>
-                           <phase>verify</phase>
-                           <goals>
-                              <goal>verify</goal>
-                           </goals>
-                        </execution>
-                     </executions>
                   </plugin>
-
-
-                  <!-- stop Selenium -->
+                  
+                  <!-- STOP SELENIUM SERVER -->
                   <plugin>
                      <groupId>org.apache.maven.plugins</groupId>
                      <artifactId>maven-antrun-plugin</artifactId>
-
+                     
                      <executions>
-						<!-- deploy application to farm directory and waiting for the application to be ready				  -->
-						<execution>
-							<id>farm-example</id>
-							<phase>pre-integration-test</phase>
-							<configuration>
-								<tasks>
-									<property name="url.to.wait" value="http://localhost:8180/${project.build.finalName}" />												
-									<copy file="${project.build.directory}/${project.build.finalName}.${project.packaging}" todir="${jboss.master.configuration}/farm" />
-									<echo message="Waiting for application at ${url.to.wait}" />												
-									<waitfor maxwait="${application.deploy.timeout}" maxwaitunit="second">								
-										<http url="${url.to.wait}" errorsBeginAt="404" />
-									</waitfor>
-								</tasks>
-							</configuration>
-							<goals>
-								<goal>run</goal>
-							</goals>
-						</execution>      
-															               
-						<!-- this ant script runs testng natively -->
-						<execution>
-							<id>stop-selenium</id>
-							<phase>post-integration-test</phase>
-							<configuration>
-								<tasks>
-									<echo message="Undeploying application..." />
-									<delete file="${jboss.master.configuration}/farm/${project.build.finalName}.${project.packaging}" />
-								
-									<get taskname="selenium-shutdown" src="http://${selenium.host}:${selenium.port}/selenium-server/driver/?cmd=shutDownSeleniumServer" ignoreerrors="true" dest="${selenium.log.dir}/selenium.stop.msg" />
-									<echo taskname="selenium-shutdown" message="DGF Errors during shutdown are expected" />
-								</tasks>
-							</configuration>
-							<goals>
-								<goal>run</goal>
-							</goals>
-						</execution>                        
+                        <execution>
+                           <id>stop-selenium</id>
+                           <phase>post-integration-test</phase>
+                           <goals>
+                              <goal>run</goal>
+                           </goals>
+                           <configuration>
+                              <tasks>
+                                 <echo message="Undeploying application." />
+                                 <delete file="${jboss.master.configuration}/farm/${project.build.finalName}.${project.packaging}" />
+                                 <get taskname="selenium-shutdown" src="http://${selenium.host}:${selenium.port}/selenium-server/driver/?cmd=shutDownSeleniumServer" ignoreerrors="true" dest="${selenium.log.dir}/selenium.stop.msg" />
+                                 <echo taskname="selenium-shutdown" message="DGF Errors during shutdown are expected." />
+                              </tasks>
+                           </configuration>
+                        </execution>
                         
+                        <execution>
+                           <id>farm-example</id>
+                           <phase>pre-integration-test</phase>
+                           <goals>
+                              <goal>run</goal>
+                           </goals>
+                           <configuration>
+                              <tasks>
+                                 <property name="url.to.wait" value="http://localhost:8180/${project.build.finalName}" />
+                                 <copy file="${project.build.directory}/${project.build.finalName}.${project.packaging}" toDir="${jboss.master.configuration}/farm" />
+                                 <echo message="Waiting for application at ${url.to.wait}" />
+                                 <waitfor maxwait="${application.deploy.timeout}" maxwaitunit="second">
+                                    <http url="${url.to.wait}" errorsBeginAt="404" />
+                                 </waitfor>
+                              </tasks>
+                           </configuration>
+                        </execution>
                      </executions>
                   </plugin>
                </plugins>
             </pluginManagement>
          </build>
+         
+         <dependencies>
+            <dependency>
+               <groupId>org.seleniumhq.selenium.client-drivers</groupId>
+               <artifactId>selenium-java-client-driver</artifactId>
+               <scope>test</scope>
+            </dependency>
+            <dependency>
+               <groupId>org.seleniumhq.selenium.core</groupId>
+               <artifactId>selenium-core</artifactId>
+               <scope>test</scope>
+            </dependency>
+            <dependency>
+               <groupId>org.jboss.test</groupId>
+               <artifactId>richfaces-selenium</artifactId>
+               <scope>test</scope>
+            </dependency>
+         </dependencies>
+
+         <properties>
+            <ftest.testsuite>
+               jboss6x-cluster.xml
+            </ftest.testsuite>
+         </properties>
       </profile>
-      
    </profiles>
    
-   <dependencies>
-      <dependency>
-         <groupId>org.seleniumhq.selenium.client-drivers</groupId>
-         <artifactId>selenium-java-client-driver</artifactId>
-         <scope>test</scope>
-      </dependency>      
-      <dependency>
-         <groupId>org.seleniumhq.selenium.core</groupId>
-         <artifactId>selenium-core</artifactId>
-         <scope>test</scope>
-      </dependency>
-   </dependencies>
-</project>
+<!-- PROJECT MODULES DEFINED -->
+   <modules>
+      <module>jsf/login</module>
+      <module>jsf/numberguess</module>
+      <module>jsf/permalink</module>
+      <module>jsf/translator</module>
+      <module>se/hello-world</module>
+      <module>se/numberguess</module>
+   </modules>
 
+<!-- DEPENDENCIES DEFINED -->
+   <dependencyManagement>
+      <dependencies>
+         <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>jsr250-api</artifactId>
+            <version>${jsr250.version}</version> <!-- HACK -->
+            <!--<scope>compile|provided</scope>-->
+         </dependency>
+         
+         <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>${cdi.version}</version> <!-- HACK -->
+            <scope>provided</scope>
+         </dependency>
+         
+         <dependency>
+            <groupId>javax.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+            <version>${jsf.version}</version>
+            <!--<scope>compile|provided</scope>-->
+         </dependency>
+         
+         <dependency>
+            <groupId>javax.faces</groupId>
+            <artifactId>jsf-impl</artifactId>
+            <version>${jsf.version}</version>
+            <!--<scope>runtime|provided</scope>-->
+         </dependency>
+         
+         <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version> <!-- HACK -->
+            <scope>runtime</scope>
+         </dependency>
+         
+         <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>el-impl</artifactId>
+            <version>${el-impl.version}</version>
+            <!--<scope>compile|runtime</scope>-->
+         </dependency>
+         
+         <dependency>
+            <groupId>org.jboss.test</groupId>
+            <artifactId>richfaces-selenium</artifactId>
+            <version>${richfaces-selenium}</version>
+            <scope>test</scope>
+         </dependency>
+         
+         <dependency>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet</artifactId>
+            <version>${weld-servlet.version}</version> <!-- HACK -->
+            <scope>runtime</scope> <!-- ALSO provided -->
+         </dependency>
+         
+         <dependency>
+            <groupId>org.seleniumhq.selenium.core</groupId>
+            <artifactId>selenium-core</artifactId>
+            <version>${selenium-core.version}</version>
+            <scope>test</scope>
+         </dependency>
+         
+         <dependency>
+            <groupId>org.seleniumhq.selenium.client-drivers</groupId>
+            <artifactId>selenium-java-client-driver</artifactId>
+            <version>${selenium-driver.version}</version>
+            <scope>test</scope>
+         </dependency>
+         
+         <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <classifier>${testng.classifier}</classifier>
+            <scope>test</scope>
+         </dependency>
+      </dependencies>
+   </dependencyManagement>
+   
+<!-- PROPERTIES DEFINED -->
+   <properties>
+      <!-- LIBRARY VERSIONS -->
+      <ant.junit.version>
+         1.6.2
+      </ant.junit.version>
+<!-- HACK !!! NOT SPECIFIED IN OLD POMs -->
+      <cdi.version>
+         1.0-SP1
+      </cdi.version>
+      <el-impl.version>
+         2.2
+      </el-impl.version>
+      <jetty.version>
+         6.1.21
+      </jetty.version>
+      <jsf.version>
+         2.0.2-FCS
+      </jsf.version>
+<!-- HACK !!! NOT SPECIFIED IN OLD POMs -->
+      <jsr250.version>
+         1.0
+      </jsr250.version>
+<!-- HACK !!! NOT SPECIFIED IN OLD POMs -->
+      <jstl.version>
+         RELEASE
+      </jstl.version>
+      <richfaces-selenium.version>
+         1.5.0.Final
+      </richfaces-selenium.version>
+      <selenium-core.version>
+         1.0.1
+      </selenium-core.version>
+      <selenium-driver.version>
+         1.0.1
+      </selenium-driver.version>
+      <testng.classifier>
+         jdk15
+      </testng.classifier>
+      <testng.version>
+         5.10
+      </testng.version>
+<!-- HACK !!! NOT SPECIFIED IN OLD POMs -->
+      <weld-servlet.version>
+         1.1.0-SNAPSHOT
+      </weld-servlet.version>
+      <!-- PLUGIN VERSIONS -->
+      <cargo-maven2.version>
+         1.0
+      </cargo-maven2.version>
+      <failsafe-maven.version>
+         2.4.3-alpha-1
+      </failsafe-maven.version>
+      <maven-compiler.version>
+         2.3.1
+      </maven-compiler.version>
+<!-- NOT SPECIFIED IN OLD POMs
+      <maven-jetty.version>
+      </maven-jetty.version>
+-->
+      <selenium-maven.version>
+         1.0
+      </selenium-maven.version>
+<!-- NOT SPECIFIED IN OLD POMs
+      <tomcat-maven.version>
+      </tomcat-maven.version>
+-->
+      <!-- TESTING PROPERTIES -->
+      <application.deploy.timeout>
+         300
+      </application.deploy.timeout>
+      <ftest-classes-dir>
+         ${project.build.directory}/ftest
+      </ftest-classes-dir>
+      <ftest-sources-dir>
+         src/ftest/java
+      </ftest-sources-dir>
+      <ftest.version.discriminator />
+      <selenium.browser>
+         *firefoxproxy
+      </selenium.browser>
+      <selenium.debug>
+         false
+      </selenium.debug>
+      <selenium.log.dir>
+         ${project.build.directory}/ftest-logs
+      </selenium.log.dir>
+      <selenium.speed>
+         0
+      </selenium.speed>
+      <selenium.timeout>
+         30000
+      </selenium.timeout>
+      <suite-xml-dir>
+         src/test/selenium
+      </suite-xml-dir>
+      <!-- RICHFACES-SELENIUM PROPERTIES -->
+      <browserSessionReuse>
+         true
+      </browserSessionReuse>
+      <cargo.jvmargs.additional />
+      <cargo.timeout.deploy>
+         120000
+      </cargo.timeout.deploy>
+      <context.deploy.path>
+         ${context.path}
+      </context.deploy.path>
+      <context.host>
+         localhost
+      </context.host>
+      <context.path>
+         /
+      </context.path>
+      <context.root>
+         http://${context.host}:8080/
+      </context.root>
+      <deployable.location />
+      <deployable.type>
+         war
+      </deployable.type>
+      <method>
+         *
+      </method>
+      <resource.dir>
+         ${project.build.directory}/ftest
+      </resource.dir>
+      <selenium.host>
+         localhost
+      </selenium.host>
+      <selenium.maximize>
+         false
+      </selenium.maximize>
+      <selenium.port>
+         14444
+      </selenium.port>
+      <selenium.timeout.ajax>
+         15000
+      </selenium.timeout.ajax>
+      <selenium.timeout.default>
+         30000
+      </selenium.timeout.default>
+      <selenium.timeout.gui>
+         5000
+      </selenium.timeout.gui>
+      <selenium.timeout.model>
+         30000
+      </selenium.timeout.model>
+   </properties>
+</project>

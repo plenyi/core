@@ -1,17 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-   <modelVersion>4.0.0</modelVersion>
+   
+   <!--   WELD-TRANSLATOR-PARENT   BETA   -->
+   
    <parent>
       <groupId>org.jboss.weld.examples</groupId>
       <artifactId>weld-examples-parent</artifactId>
       <version>1.1.0-SNAPSHOT</version>
       <relativePath>../../pom.xml</relativePath>
    </parent>
+
+   <modelVersion>4.0.0</modelVersion>
    <groupId>org.jboss.weld.examples.jsf.translator</groupId>
    <artifactId>weld-jsf-translator-parent</artifactId>
    <packaging>pom</packaging>
    <name>Weld Examples: Translator [parent] (JSF)</name>
+   <description>Ear Example for the reference implementation of JSR 299: Weld</description>
    <url>http://www.seamframework.org/Weld</url>
+   
    <licenses>
       <license>
          <name>Apache License, Version 2.0</name>
@@ -19,17 +25,15 @@
          <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
       </license>
    </licenses>
-
-   <description>
-      Ear Example for the reference implementation of JSR 299: Weld
-   </description>
-
+   
+<!-- PROJECT MODULES DEFINED -->
    <modules>
       <module>war</module>
-      <module>ejb</module>
       <module>ear</module>
+      <module>ejb</module>
    </modules>
-
+   
+<!-- DEPENDENCIES DEFINED -->
    <dependencyManagement>
       <dependencies>
          <dependency>
@@ -38,12 +42,13 @@
             <version>${project.version}</version>
             <type>war</type>
          </dependency>
+         
          <dependency>
             <groupId>org.jboss.weld.examples.jsf.translator</groupId>
             <artifactId>weld-jsf-translator-ear</artifactId>
             <version>${project.version}</version>
-            <type>ear</type>
          </dependency>
+         
          <dependency>
             <groupId>org.jboss.weld.examples.jsf.translator</groupId>
             <artifactId>weld-jsf-translator-ejb</artifactId>
@@ -52,6 +57,4 @@
          </dependency>
       </dependencies>
    </dependencyManagement>
-
 </project>
-

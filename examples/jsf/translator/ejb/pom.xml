@@ -1,18 +1,21 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-   <modelVersion>4.0.0</modelVersion>
+   
+   <!--   WELD-TRANSLATOR-EJB   BETA   -->
    
    <parent>
       <groupId>org.jboss.weld.examples.jsf.translator</groupId>
       <artifactId>weld-jsf-translator-parent</artifactId>
       <version>1.1.0-SNAPSHOT</version>
    </parent>
-   
+
+   <modelVersion>4.0.0</modelVersion>
    <groupId>org.jboss.weld.examples.jsf.translator</groupId>
    <artifactId>weld-jsf-translator-ejb</artifactId>
    <packaging>ejb</packaging>
    <name>Weld Examples: Translator [ejb] (JSF)</name>
    <url>http://www.seamframework.org/Weld</url>
+   
    <licenses>
       <license>
          <name>Apache License, Version 2.0</name>
@@ -21,14 +24,12 @@
       </license>
    </licenses>
    
+   <build>
+      <finalName>weld-translator</finalName>
+   </build>
+   
+<!-- DEPENDENCIES DEFINED -->
    <dependencies>
-      <dependency>
-         <groupId>org.testng</groupId>
-         <artifactId>testng</artifactId>
-         <scope>test</scope>
-         <classifier>${org.testng.testng.classifier}</classifier>
-      </dependency>
-      
       <dependency>
          <groupId>javax.enterprise</groupId>
          <artifactId>cdi-api</artifactId>
@@ -41,14 +42,11 @@
          <scope>provided</scope>
       </dependency>
       
+      <dependency>
+         <groupId>org.testng</groupId>
+         <artifactId>testng</artifactId>
+         <classifier>${testng.classifier}</classifier>
+         <scope>test</scope>
+      </dependency>
    </dependencies>
-   
-   <build>
-      <finalName>weld-translator</finalName>
-      <sourceDirectory>src/main/java</sourceDirectory>
-      <outputDirectory>target/classes</outputDirectory>
-      <defaultGoal>validate</defaultGoal>
-   </build>
-   
 </project>
-

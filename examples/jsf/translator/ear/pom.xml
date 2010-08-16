@@ -1,19 +1,21 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-   <modelVersion>4.0.0</modelVersion>
+   
+   <!--   WELD-TRANSLATOR-EAR   BETA   -->
    
    <parent>
       <groupId>org.jboss.weld.examples.jsf.translator</groupId>
       <artifactId>weld-jsf-translator-parent</artifactId>
       <version>1.1.0-SNAPSHOT</version>
    </parent>
-   
+
+   <modelVersion>4.0.0</modelVersion>
    <groupId>org.jboss.weld.examples.jsf.translator</groupId>
    <artifactId>weld-jsf-translator-ear</artifactId>
    <packaging>ear</packaging>
    <name>Weld Examples: Translator [ear] (JSF)</name>
-   
    <url>http://www.seamframework.org/Weld</url>
+   
    <licenses>
       <license>
          <name>Apache License, Version 2.0</name>
@@ -22,78 +24,42 @@
       </license>
    </licenses>
    
-   <dependencies>
+   <build>
+      <finalName>weld-translator</finalName>
+      
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-ear-plugin</artifactId>
+            
+            <configuration>
+               <modules>
+                  <webModule>
+                     <groupId>org.jboss.weld.examples.jsf.translator</groupId>
+                     <artifactId>weld-jsf-translator-war</artifactId>
+                     <contextRoot>/weld-translator</contextRoot>
+                  </webModule>
+               </modules>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
    
-      <!-- not including this was probably a grave mistake :)
-      <dependency>
-         <groupId>org.jboss.weld.examples.jsf.translator</groupId>
-         <artifactId>weld-jsf-translator-ejb</artifactId>
-         <type>ejb</type>
-      </dependency>
-      
-      <dependency>
-         <groupId>org.jboss.weld.examples.jsf.translator</groupId>
-         <artifactId>weld-jsf-translator-war</artifactId>
-         <type>war</type>
-      </dependency>
-      -->
-   
-      <dependency>
-         <groupId>org.testng</groupId>
-         <artifactId>testng</artifactId>
-         <scope>test</scope>
-         <classifier>${org.testng.testng.classifier}</classifier>
-      </dependency>
-      
-      <dependency>
-         <groupId>org.seleniumhq.selenium.core</groupId>
-         <artifactId>selenium-core</artifactId>
-         <scope>test</scope>
-      </dependency>
-
-      <dependency>
-         <groupId>org.seleniumhq.selenium.client-drivers</groupId>
-         <artifactId>selenium-java-client-driver</artifactId>
-         <scope>test</scope>
-      </dependency>
-
-      <dependency>
-         <groupId>org.jboss.test</groupId>
-         <artifactId>richfaces-selenium</artifactId>
-         <scope>test</scope>
-      </dependency>
-      
-      <!-- not sure why I included this one -->
-      <dependency>
-         <groupId>org.glassfish.web</groupId>
-         <artifactId>el-impl</artifactId>
-         <scope>compile</scope>
-         <exclusions>
-            <exclusion>
-               <groupId>javax.el</groupId>
-               <artifactId>el-api</artifactId>
-            </exclusion>
-         </exclusions>
-      </dependency>
-      
-      <!-- or this one -->
-      <dependency>
-         <groupId>javax.faces</groupId>
-         <artifactId>jsf-api</artifactId>
-         <scope>provided</scope>
-      </dependency>
-
-   </dependencies>
-
+<!-- PROFILES DEFINED -->
    <profiles>
       <profile>
          <id>ftest-jboss-remote-51</id>
+         
          <activation>
             <activeByDefault>false</activeByDefault>
          </activation>
-
+         
          <build>
             <plugins>
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-compiler-plugin</artifactId>
+               </plugin>
                <plugin>
                   <groupId>org.codehaus.cargo</groupId>
                   <artifactId>cargo-maven2-plugin</artifactId>
@@ -113,14 +79,20 @@
             </plugins>
          </build>
       </profile>
+      
       <profile>
          <id>ftest-jboss-remote-60</id>
+         
          <activation>
             <activeByDefault>false</activeByDefault>
          </activation>
-
+         
          <build>
             <plugins>
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-compiler-plugin</artifactId>
+               </plugin>
                <plugin>
                   <groupId>org.codehaus.cargo</groupId>
                   <artifactId>cargo-maven2-plugin</artifactId>
@@ -141,29 +113,59 @@
          </build>
       </profile>
    </profiles>
-
-
-   <build>
-      <finalName>weld-translator</finalName>
-      <testSourceDirectory>src/ftest/java</testSourceDirectory>
-      <testOutputDirectory>target/test</testOutputDirectory>
-      <defaultGoal>validate</defaultGoal>
-      <plugins>
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-ear-plugin</artifactId>
-            <configuration>
-               <modules>
-                  <webModule>
-                     <groupId>org.jboss.weld.examples.jsf.translator</groupId>
-                     <artifactId>weld-jsf-translator-war</artifactId>
-                     <contextRoot>/weld-translator</contextRoot>
-                  </webModule>
-               </modules>
-            </configuration>
-         </plugin>
-      </plugins>
-   </build>
    
+<!-- DEPENDENCIES DEFINED -->
+   <dependencies>
+      <dependency>
+         <groupId>org.jboss.weld.examples.jsf.translator</groupId>
+         <artifactId>weld-jsf-translator-ejb</artifactId>
+         <type>ejb</type>
+      </dependency>
+      
+      <dependency>
+         <groupId>org.jboss.weld.examples.jsf.translator</groupId>
+         <artifactId>weld-jsf-translator-war</artifactId>
+         <type>war</type>
+      </dependency>
+      
+      <!-- commented in old pom
+      <dependency>
+         <groupId>org.jboss.el</groupId>
+         <artifactId>jboss-el</artifactId>
+         <exclusions>
+            <exclusion>
+               <groupId>javax.el</groupId>
+               <artifactId>el-api</artifactId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+      -->
+      
+      <!-- SHOULD BE LOADED FROM PROFILE
+      <dependency>
+         <groupId>org.jboss.test</groupId>
+         <artifactId>richfaces-selenium</artifactId>
+         <scope>test</scope>
+      </dependency>
+   
+      <dependency>
+         <groupId>org.seleniumhq.selenium.client-drivers</groupId>
+         <artifactId>selenium-java-client-driver</artifactId>
+         <scope>test</scope>
+      </dependency>
+      
+      <dependency>
+         <groupId>org.seleniumhq.selenium.core</groupId>
+         <artifactId>selenium-core</artifactId>
+         <scope>test</scope>
+      </dependency>
+      -->
+      
+      <dependency>
+         <groupId>org.testng</groupId>
+         <artifactId>testng</artifactId>
+         <classifier>${testng.classifier}</classifier>
+         <scope>test</scope>
+      </dependency>
+   </dependencies>
 </project>
-

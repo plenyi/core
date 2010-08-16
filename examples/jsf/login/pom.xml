@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-   <modelVersion>4.0.0</modelVersion>
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   
+   <!--   WELD-LOGIN   BETA   -->
+   
    <parent>
       <groupId>org.jboss.weld.examples</groupId>
       <artifactId>weld-examples-parent</artifactId>
@@ -10,12 +10,13 @@
       <relativePath>../../pom.xml</relativePath>
    </parent>
 
+   <modelVersion>4.0.0</modelVersion>
    <groupId>org.jboss.weld.examples.jsf</groupId>
    <artifactId>weld-jsf-login</artifactId>
    <packaging>war</packaging>
    <name>Weld Examples: Login (JSF)</name>
-
    <url>http://www.seamframework.org/Weld</url>
+   
    <licenses>
       <license>
          <name>Apache License, Version 2.0</name>
@@ -23,80 +24,21 @@
          <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
       </license>
    </licenses>
-
-   <dependencies>
-      <dependency>
-         <groupId>org.testng</groupId>
-         <artifactId>testng</artifactId>
-         <scope>test</scope>
-         <classifier>${org.testng.testng.classifier}</classifier>
-      </dependency>
-
-      <dependency>
-         <groupId>javax.enterprise</groupId>
-         <artifactId>cdi-api</artifactId>
-         <scope>provided</scope>
-      </dependency>
-
-      <dependency>
-         <groupId>javax.faces</groupId>
-         <artifactId>jsf-api</artifactId>
-         <scope>provided</scope>
-      </dependency>
-
-      <dependency>
-         <groupId>javax.persistence</groupId>
-         <artifactId>persistence-api</artifactId>
-         <scope>provided</scope>
-      </dependency>
-
-      <dependency>
-         <groupId>org.glassfish.web</groupId>
-         <artifactId>el-impl</artifactId>
-         <scope>compile</scope>
-         <exclusions>
-            <exclusion>
-               <groupId>javax.el</groupId>
-               <artifactId>el-api</artifactId>
-            </exclusion>
-         </exclusions>
-      </dependency>
-
-      <dependency>
-         <groupId>org.seleniumhq.selenium.core</groupId>
-         <artifactId>selenium-core</artifactId>
-         <scope>test</scope>
-      </dependency>
-
-      <dependency>
-         <groupId>org.seleniumhq.selenium.client-drivers</groupId>
-         <artifactId>selenium-java-client-driver</artifactId>
-         <scope>test</scope>
-      </dependency>
-
-      <dependency>
-         <groupId>org.jboss.test</groupId>
-         <artifactId>richfaces-selenium</artifactId>
-         <scope>test</scope>
-      </dependency>
-
-   </dependencies>
-
+   
    <build>
       <finalName>weld-login</finalName>
-      <sourceDirectory>src/main/java</sourceDirectory>
-      <testSourceDirectory>src/ftest/java</testSourceDirectory>
-      <outputDirectory>target/classes</outputDirectory>
-      <testOutputDirectory>target/test</testOutputDirectory>
-      <defaultGoal>validate</defaultGoal>
    </build>
-
+   
+<!-- PROFILES DEFINED -->
    <profiles>
       <profile>
          <id>ftest-jboss-remote-51</id>
-         
          <build>
             <plugins>
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-compiler-plugin</artifactId>
+               </plugin>
                <plugin>
                   <groupId>org.codehaus.cargo</groupId>
                   <artifactId>cargo-maven2-plugin</artifactId>
@@ -116,11 +58,15 @@
             </plugins>
          </build>
       </profile>
+      
       <profile>
          <id>ftest-jboss-remote-60</id>
-
          <build>
             <plugins>
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-compiler-plugin</artifactId>
+               </plugin>
                <plugin>
                   <groupId>org.codehaus.cargo</groupId>
                   <artifactId>cargo-maven2-plugin</artifactId>
@@ -141,6 +87,63 @@
          </build>
       </profile>
    </profiles>
-
+   
+<!-- DEPENDENCIES DEFINED -->
+   <dependencies>
+      <dependency>
+         <groupId>javax.enterprise</groupId>
+         <artifactId>cdi-api</artifactId>
+         <scope>provided</scope>
+      </dependency>
+      
+      <dependency>
+         <groupId>javax.faces</groupId>
+         <artifactId>jsf-api</artifactId>
+         <scope>provided</scope>
+      </dependency>
+      
+      <dependency>
+         <groupId>javax.persistence</groupId>
+         <artifactId>persistence-api</artifactId>
+         <scope>provided</scope>
+      </dependency>
+      
+      <dependency>
+         <groupId>org.glassfish.web</groupId>
+         <artifactId>el-impl</artifactId>
+         <exclusions>
+            <exclusion>
+               <groupId>javax.el</groupId>
+               <artifactId>el-api</artifactId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+      
+      <!-- SHOULD BE LOADED FROM PROFILE
+      <dependency>
+         <groupId>org.jboss.test</groupId>
+         <artifactId>richfaces-selenium</artifactId>
+         <scope>test</scope>
+      </dependency>
+   
+      <dependency>
+         <groupId>org.seleniumhq.selenium.client-drivers</groupId>
+         <artifactId>selenium-java-client-driver</artifactId>
+         <scope>test</scope>
+      </dependency>
+      
+      <dependency>
+         <groupId>org.seleniumhq.selenium.core</groupId>
+         <artifactId>selenium-core</artifactId>
+         <scope>test</scope>
+      </dependency>
+      -->
+      
+      <dependency>
+         <groupId>org.testng</groupId>
+         <artifactId>testng</artifactId>
+         <classifier>${testng.classifier}</classifier>
+         <scope>test</scope>
+      </dependency>
+   </dependencies>
 </project>
-
